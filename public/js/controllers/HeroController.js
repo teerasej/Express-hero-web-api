@@ -1,14 +1,18 @@
-myApp.controller('HeroController', ['$scope','ProfileService', function($scope, ProfileService){
+myApp.controller('HeroController', ['$scope', 'ProfileService', function ($scope, ProfileService) {
 
-    $scope.createNewHero = function(hero){
+    
+
+    $scope.addNewHero = function (hero) {
 
         ProfileService.addHero(hero.name, hero.realName)
-            .success(function(result){
-                console.log(result);
+            .success(function (result) {
+                $scope.status = "Hero added.";
+                $scope.hero.name = "";
+                $scope.hero.realName = "";
             })
-            .error(function(error){
-                alert('Error');
-            })
+            .error(function (error) {
+                $scope.status = "Error on Adding hero, try again.";
+            });
 
     }
 
